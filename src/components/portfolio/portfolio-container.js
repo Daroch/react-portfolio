@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import portfolioItem from "./portfolio-item";
 import PortfolioItem from "./portfolio-item";
 
 export default class PortfolioContainer extends Component {
@@ -8,11 +7,17 @@ export default class PortfolioContainer extends Component {
         super();
         console.log("Portfolio Container is rendered");
     }
+    portfolioItems(){
+        const data=["Frodo","Gandalf","Legolas","Aragorn"];
+        return data.map(item => {
+            return <PortfolioItem title={item}/>
+        })
+    }
     render() {
         return (
             <div>
                 <h2>Portfolio items go here...</h2>
-                <PortfolioItem />
+                {this.portfolioItems()}
             </div>
         );
     }
