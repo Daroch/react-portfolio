@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import moment from "moment/moment";
 
-import PortfolioContainer from './portfolio/portfolio-container';
 import NavigationContainer from './navigation/navigation-container';
+import PortfolioDetails from './portfolio/portfolio-details';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,12 +13,14 @@ import Home from './pages/home';
 import Blog from './pages/blog';
 import Contact from './pages/contact';
 import About from './pages/about';
+import NoMatch from './pages/no-match';
 
 export default class App extends Component {
   render() {
     return (
       <div className='app'>
-        <Router>
+        <h1>Daroch React Portfolio</h1>
+        <div>{moment().format('MMMM Do YYYY, h:mm:ss a')}</div><Router>
           <div>
             <NavigationContainer />
             <Switch>
@@ -25,12 +28,11 @@ export default class App extends Component {
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
+              <Route exact path="/portfolio/:slug" component={PortfolioDetails} />
+              <Route component={NoMatch} />
             </Switch>
           </div>
         </Router>
-        <h1>Daroch React Portfolio</h1>
-        <div>{moment().format('MMMM Do YYYY, h:mm:ss a')}</div>
-        <PortfolioContainer />
       </div>
     );
   }
