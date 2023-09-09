@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import axios from 'axios';
 
 import PortfolioItem from "./portfolio-item";
-import axios from 'axios';
+
 
 
 export default class PortfolioContainer extends Component {
@@ -10,16 +11,10 @@ export default class PortfolioContainer extends Component {
         this.state = {
             pageTitle: "Welcome to my portfolio",
             isloading: false,
-            data: [
-            { title: "Quip", category: "eCommerce", slug: "quip" },
-            { title: "Eventbrite", category: "Scheduling", slug: "eventbrite" },
-            { title: "Ministry Safe", category: "Enterprise", slug: "ministrysafe" },
-            { title: "SwingAway", category: "eCommerce", slug: "swingaway" }
-            ]
+            data: []
         };
 
         this.handleFilter = this.handleFilter.bind(this);
-        this.getPortfolioItems = this.getPortfolioItems.bind(this);
     }
 
     handleFilter(filter) {
@@ -32,30 +27,37 @@ export default class PortfolioContainer extends Component {
 
     portfolioItems() {
         return this.state.data.map(item => {
-          return <PortfolioItem key={item.slug} title={item.title} slug={item.slug} url={"google.com"} />;
+          return <PortfolioItem key={item.id} title={item.name} slug={item.id} url={item.url} description={item.description} />;
         });
     }
 
     getPortfolioItems(){
         axios.get('https://daroch.devcamp.space/portfolio/portfolio_items')
             .then(response => {
-            // handle success
-            console.log(response);
+                // handle success
+                console.log(response);
+                this.setState({
+                        data: response.data.portfolio_items
+                })
             })
             .catch(error => {
-            // handle error
-            console.log(error);
+                // handle error
+                console.log(error);
             })
             .finally(function () {
             // always executed
         });
     }
-        
-        render() {
+
+    componentDidMount(){
         this.getPortfolioItems();
+    }
+        
+    render() {
         if(this.state.isloading){
             return <div>Loading....</div>;
         }
+
         return (
         <div>
             <h2>{this.state.pageTitle}</h2>
