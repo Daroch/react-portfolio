@@ -8,6 +8,7 @@ export default class PortfolioContainer extends Component {
         super();
         this.state = {
             pageTitle: "Welcome to my portfolio",
+            isloading: false,
             data: [
             { title: "Quip", category: "eCommerce" },
             { title: "Eventbrite", category: "Scheduling" },
@@ -29,11 +30,14 @@ export default class PortfolioContainer extends Component {
 
     portfolioItems() {
         return this.state.data.map(item => {
-          return <PortfolioItem title={item.title} url={"google.com"} />;
+          return <PortfolioItem key={item.title} title={item.title} url={"google.com"} />;
         });
     }
 
     render() {
+        if(this.state.isloading){
+            return <div>Loading....</div>;
+        }
         return (
         <div>
             <h2>{this.state.pageTitle}</h2>

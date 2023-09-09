@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:bottega-code-school/js-builder.git"
+    "url": "https://github.com/Daroch/react-portfolio.git"
   },
   "keywords": [
     "es6",
@@ -25,12 +25,12 @@
     "sass",
     "css module"
   ],
-  "author": "Your Name Here",
+  "author": "Daroch",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bottega-code-school/js-builder/issues"
+    "url": "https://github.com/Daroch/react-portfolio.git"
   },
-  "homepage": "https://github.com/bottega-code-school/js-builder",
+  "homepage": "https://github.com/Daroch/react-portfolio.git",
   "dependencies": {
     "ajv": "6.12.0",
     "autoprefixer": "^9.1.0",
@@ -66,8 +66,8 @@
     "redux": "4.0.5",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.21.0",
-    "webpack": "4.42.1",
-    "webpack-cli": "3.3.11",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
     "webpack-dev-middleware": "3.7.2",
     "webpack-dev-server": "3.10.3",
     "webpack-hot-middleware": "2.25.0",
