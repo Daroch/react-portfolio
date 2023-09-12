@@ -27,12 +27,18 @@ export default class PortfolioContainer extends Component {
 
     portfolioItems() {
         return this.state.data.map(item => {
-          return <PortfolioItem key={item.id} item={item} />;
+            //debugger;
+            return (
+                <PortfolioItem
+                    key={item.id}
+                    item={item}
+                />
+            );
         });
     }
 
     getPortfolioItems(){
-        axios.get('https://daroch.devcamp.space/portfolio/portfolio_items')
+        axios.get('https://daroch314.devcamp.space/portfolio/portfolio_items')
             .then(response => {
                 // handle success
                 console.log(response);
