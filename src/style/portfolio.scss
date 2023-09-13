@@ -12,5 +12,34 @@
             height: 350px;
             width: 100%;
         }
+
+        .image-text-wrapper {
+            position: absolute;
+            top: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            padding-left: 100px;
+            padding-right: 100px;
+
+            
+            .logo-wrapper img {
+                width: 50%;
+                margin-bottom: 20px;
+            }
+
+            .subtitle {
+                transition: 1s ease-in-out;
+                color: transparent;
+            }
+        }
+
+        .image-text-wrapper:hover .subtitle {
+            color: $teal;
+            font-weight: 400;
+        }
     }
 }
