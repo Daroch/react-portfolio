@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-
-import NavigationContainer from './navigation/navigation-container';
-import PortfolioDetails from './portfolio/portfolio-details';
-
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom';
+
+import NavigationContainer from './navigation/navigation-container';
+import PortfolioDetails from './portfolio/portfolio-details';
+import Auth from './pages/auth';
+
+
 import Home from './pages/home';
 import Blog from './pages/blog';
 import Contact from './pages/contact';
@@ -27,6 +29,7 @@ export default class App extends Component {
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
               <Route exact path="/portfolio/:slug" component={PortfolioDetails} />
+              <Route path="/auth" component={Auth} />
               <Route component={NoMatch} />
             </Switch>
           </div>
