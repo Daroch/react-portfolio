@@ -3,6 +3,14 @@
     grid-template-columns: 1fr 1fr 1fr;
 
     .portfolio-item-wrapper {
-        
+        position: relative;
+
+        .portfolio-img-background {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 350px;
+            width: 100%;
+        }
     }
 }
