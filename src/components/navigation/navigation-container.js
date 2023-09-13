@@ -10,19 +10,19 @@ export default class NavigationContainer  extends Component {
             <div className="nav-wrapper">
                 <div className="left-side">
                     <div className="nav-link-wrapper">
-                        <NavLink exact to="/" activeClassName="nav_link_active">Home</NavLink>
+                        <NavLink exact to="/" activeClassName="nav-link-active">Home</NavLink>
                     </div>
                     <div className="nav-link-wrapper">
-                        <NavLink to="/about" activeClassName="nav_link_active">About</NavLink>
+                        <NavLink to="/about" activeClassName="nav-link-active">About</NavLink>
                     </div>
                     <div className="nav-link-wrapper">
-                        <NavLink to="/contact" activeClassName="nav_link_active">Contact</NavLink>
+                        <NavLink to="/contact" activeClassName="nav-link-active">Contact</NavLink>
                     </div>
                     <div className="nav-link-wrapper">
-                        <NavLink to="/blog" activeClassName="nav_link_active">Blog</NavLink>
+                        <NavLink to="/blog" activeClassName="nav-link-active">Blog</NavLink>
                     </div>
                     <div className="nav-link-wrapper">
-                        {false ? <NavLink to="/add_post" activeClassName="nav_link_active">Add Post</NavLink> : null}
+                        {false ? <NavLink to="/add_post" activeClassName="nav-link-active">Add Post</NavLink> : null}
                     </div>
                 </div>
                 <div className="right-side">
