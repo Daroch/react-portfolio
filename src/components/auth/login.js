@@ -13,14 +13,15 @@ export default class Login extends Component {
     }
 
     handleChange(event) {
-        console.log("Change State", event);
+        console.log("Handle Change", event);
         this.setState({
             [event.target.name]: event.target.value
         })
     }
 
     handleSubmit(event) {
-        console.log("Submit Form", event);
+        console.log("Handle Submit", this.state.email, this.state.password);
+        event.preventDefault();
     }
 
     render() {
