@@ -6,7 +6,8 @@ export default class Login extends Component {
         super();
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            errorText: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -16,7 +17,8 @@ export default class Login extends Component {
     handleChange(event) {
         console.log("Handle Change", event);
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            errorText: ""
         })
     }
 
@@ -33,11 +35,21 @@ export default class Login extends Component {
             {withCredentials: true}
         )
         .then(response => {
+            if (response.data.status === "created"){
+                console.log("Yeah");
+            }else{
+                this.setState({
+                    errorText: "Wrong email or password"
+                });
+            }
             console.log("response",response);
         })
         .catch(error =>{
-            console.log("error", error);
-        })
+            //console.log("some error ocurred", error);
+            this.setState({
+                errorText: "Some error ocurred"
+            })
+        });
         event.preventDefault();
     }
 
@@ -45,6 +57,7 @@ export default class Login extends Component {
         return (
             <div>
                 <h1>Login to Access DashBoard</h1>
+                <div>{this.state.errorText}</div>
                 <form onSubmit={this.handleSubmit}>
                     <input 
                     type="text" 
