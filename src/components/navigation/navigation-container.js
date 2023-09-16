@@ -2,6 +2,13 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 const NavigationContainer = (props) =>{
+    const dinamycLink = (route,Linktext) => {
+        return(
+            <div className="nav-link-wrapper">
+                <NavLink to={route} activeClassName="nav-link-active">{Linktext}</NavLink>
+            </div>
+        )            
+    }
         return (
             <div className="nav-wrapper">
                 <div className="left-side">
@@ -14,9 +21,7 @@ const NavigationContainer = (props) =>{
                     <div className="nav-link-wrapper">
                         <NavLink to="/contact" activeClassName="nav-link-active">Contact</NavLink>
                     </div>
-                    <div className="nav-link-wrapper">
-                        <NavLink to="/blog" activeClassName="nav-link-active">Blog</NavLink>
-                    </div>
+                    {props.loggedInStatus === "LOGGED_IN" ? dinamycLink("/blog","Blog") : null}
                     <div className="nav-link-wrapper">
                         {false ? <NavLink to="/add_post" activeClassName="nav-link-active">Add Post</NavLink> : null}
                     </div>
