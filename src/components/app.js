@@ -4,6 +4,7 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import axios from 'axios';
 
 import NavigationContainer from './navigation/navigation-container';
 import PortfolioDetails from './portfolio/portfolio-details';
@@ -23,7 +24,7 @@ export default class App extends Component {
       loggedInStatus: "NOT_LOGGED_IN"
     }
     this.handleSuccesfulLogin = this.handleSuccesfulLogin.bind(this);
-    this.handleUnSuccesfulLogin = this.handleUnSuccesfulLogin.bind(this);
+    this.handleUnsuccesfulLogin = this.handleUnsuccesfulLogin.bind(this);
   }
 
   handleSuccesfulLogin() {
@@ -32,10 +33,36 @@ export default class App extends Component {
     })
   }
 
-  handleUnSuccesfulLogin() {
+  handleUnsuccesfulLogin() {
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN"
     })
+  }
+
+  checkLoginStatus() {
+    return axios.get("https://api.devcamp.space/logged_in", {
+      withCredentials: true
+    })
+    .then(response =>{
+      console.log("logged in return", response);
+      const loggedIn = response.data.logged_in;
+      const loggedInStatus = this.state.loggedInStatus;
+      if (loggedIn && loggedInStatus === "LOGGED_IN") {
+        console.log("You are logged");
+      } else if (loggedIn && loggedInStatus === "NOT_LOGGED_IN"){
+        this.setState({
+          loggedInStatus: "LOGGED_IN"
+        });
+      } else if (loggedIn === false){
+        this.setState({
+          loggedInStatus: "NOT_LOGGED_IN"
+        });
+      }
+    });
+  }
+
+  componentDidMount(){
+    this.checkLoginStatus();
   }
 
   render() {
@@ -44,6 +71,7 @@ export default class App extends Component {
         <Router>
           <div>
             <NavigationContainer />
+            <h2>{this.state.loggedInStatus}</h2>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
@@ -56,7 +84,7 @@ export default class App extends Component {
                   <Auth 
                     {...props} 
                     handleSuccesfulLogin={this.handleSuccesfulLogin} 
-                    handleUnSuccesfulLogin={this.handleUnSuccesfulLogin}
+                    handleUnsuccesfulLogin={this.handleUnsuccesfulLogin}
                     />
                 )
               } />
