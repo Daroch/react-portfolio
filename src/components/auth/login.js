@@ -36,11 +36,12 @@ export default class Login extends Component {
         )
         .then(response => {
             if (response.data.status === "created"){
-                console.log("Yeah");
+                this.props.handleSuccesfulAuth();
             }else{
                 this.setState({
                     errorText: "Wrong email or password"
                 });
+                this.props.handleUnsuccesfulAuth();
             }
             console.log("response",response);
         })
@@ -48,7 +49,8 @@ export default class Login extends Component {
             //console.log("some error ocurred", error);
             this.setState({
                 errorText: "Some error ocurred"
-            })
+            });
+            this.props.handleUnsuccesfulAuth();
         });
         event.preventDefault();
     }
