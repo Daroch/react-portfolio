@@ -87,7 +87,6 @@ export default class App extends Component {
             loggedInStatus={this.state.loggedInStatus} 
             handleSuccesfulLogout={this.handleSuccesfulLogout}
             />
-            <h2>{this.state.loggedInStatus}</h2>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
