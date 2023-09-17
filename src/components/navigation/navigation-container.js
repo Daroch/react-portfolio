@@ -36,7 +36,11 @@ const NavigationContainer = (props) =>{
                 <div className="nav-link-wrapper">
                     <NavLink to="/contact" activeClassName="nav-link-active">Contact</NavLink>
                 </div>
-                {props.loggedInStatus === "LOGGED_IN" ? dinamycLink("/blog","Blog") : null}
+                <div className="nav-link-wrapper">
+                    <NavLink to="/blog" activeClassName="nav-link-active">Blog</NavLink>
+                </div>
+                
+                {props.loggedInStatus === "LOGGED_IN" ? dinamycLink("/portfolio-manager","Portfolio Manager") : null}
                 <div className="nav-link-wrapper">
                     {false ? <NavLink to="/add_post" activeClassName="nav-link-active">Add Post</NavLink> : null}
                 </div>

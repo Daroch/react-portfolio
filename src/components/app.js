@@ -7,6 +7,7 @@ import {
 import axios from 'axios';
 
 import NavigationContainer from './navigation/navigation-container';
+import PortfolioManager from './pages/portfolio-manager';
 import PortfolioDetails from './portfolio/portfolio-details';
 import Auth from './pages/auth';
 
@@ -72,9 +73,9 @@ export default class App extends Component {
     this.checkLoginStatus();
   }
 
-  authorizaedPages(){
+  authorizedPages(){
     return [
-      <Route path="/blog" component={Blog} />
+      <Route path="/portfolio-manager" component={PortfolioManager} />
     ]
   }
   render() {
@@ -91,7 +92,8 @@ export default class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
-              { this.state.loggedInStatus === "LOGGED_IN" ? this.authorizaedPages() : null}
+              <Route path="/blog" component={Blog} />
+              { this.state.loggedInStatus === "LOGGED_IN" ? this.authorizedPages() : null}
               <Route exact path="/portfolio/:slug" component={PortfolioDetails} />
               <Route 
                 path="/auth" 
