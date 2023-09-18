@@ -10,8 +10,21 @@ export default class PortfolioManager extends Component {
         this.state = {
             portfolioItems: []
         };
+
+        this.handleSuccesfulFormSubmission = this.handleSuccesfulFormSubmission.bind(this);
+        this.handleSubmissionError = this.handleSubmissionError.bind(this);
     }
-    
+
+    handleSuccesfulFormSubmission() {
+        //TODO
+        //update state
+        //render nes item list
+    }
+
+    handleSubmissionError(error) {
+        console.log('handleSubmissionError', error);
+    }
+
     getPortfolioItems(){
         axios.get('https://daroch314.devcamp.space/portfolio/portfolio_items')
             .then(response => {
@@ -38,7 +51,10 @@ export default class PortfolioManager extends Component {
         return (
             <div className='portfolio-manager-wrapper'>
                 <div className='leftside'>
-                    <h1><PortfolioForm /></h1>
+                    <h1><PortfolioForm 
+                    handleSuccesfulFormSubmission={this.handleSuccesfulFormSubmission}
+                    handleSubmissionError={this.handleSubmissionError}
+                    /></h1>
                 </div>
                 <div className='rightside'>
                 <PortfolioSidebarList data={this.state.portfolioItems}/>
