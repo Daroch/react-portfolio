@@ -16,6 +16,7 @@ export default class PortfolioForm extends Component {
         }
 
         this.handlerChange = this.handlerChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handlerChange(event) {
@@ -23,10 +24,16 @@ export default class PortfolioForm extends Component {
             [event.target.name]: event.target.value
         })
     }
+
+    handleSubmit(event) {
+        console.log("Submit event", event);
+        event.preventDefault();
+    }
+
     render() {
         return (
             <div>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div>
                         <input
                         type="text"
@@ -37,18 +44,13 @@ export default class PortfolioForm extends Component {
                         />
                         <input
                         type="text"
-                        name="description"
-                        placeholder="Project Description"
-                        value={this.state.description}
-                        onChange={this.handlerChange}
-                        />
-                        <input
-                        type="text"
                         name="url"
                         placeholder="Project Url"
                         value={this.state.url}
                         onChange={this.handlerChange}
                         />
+                    </div>
+                    <div>
                         <input
                         type="text"
                         name="category"
@@ -63,6 +65,17 @@ export default class PortfolioForm extends Component {
                         value={this.state.position}
                         onChange={this.handlerChange}
                         />
+                    </div>
+                    <div>
+                    <input
+                        type="text"
+                        name="description"
+                        placeholder="Project Description"
+                        value={this.state.description}
+                        onChange={this.handlerChange}
+                        />
+                    </div>
+                    <div>
                         <input
                         type="text"
                         name="thumb_image"
@@ -85,7 +98,9 @@ export default class PortfolioForm extends Component {
                         onChange={this.handlerChange}
                         />
                     </div>
-                    <div><button type='submit'>Save</button></div>
+                    <div>
+                        <button type='submit'>Save</button>
+                    </div>
                 </form>
             </div>
         );
