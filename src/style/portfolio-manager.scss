@@ -8,5 +8,21 @@
 
     .rightside {
         background-color: $charcoal;
+
+        .portfolio-sidebar-list-wrapper {
+        
+            .portfolio-item-wrapper {
+                padding: 15px;
+
+                .portfolio-thumb-image img{
+                    width: 100%;
+                    
+                }
+                
+                .title {
+                    color: $offwhite;
+                }
+            }
+        }
     }
 }

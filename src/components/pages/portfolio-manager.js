@@ -1,7 +1,38 @@
 import React, { Component } from 'react';
-import PortfolioContainer from '../portfolio/portfolio-container';
+import axios from 'axios';
+
+import PortfolioSidebarList from "../portfolio/portfolio-sidebar-list";
 
 export default class PortfolioManager extends Component {
+    constructor() {
+        super();
+        this.state = {
+            portfolioItems: []
+        };
+    }
+    
+    getPortfolioItems(){
+        axios.get('https://daroch314.devcamp.space/portfolio/portfolio_items')
+            .then(response => {
+                // handle success
+                console.log(response);
+                this.setState({
+                        portfolioItems: [...response.data.portfolio_items]
+                })
+            })
+            .catch(error => {
+                // handle error
+                console.log("Error with getPortfolioItems", error);
+            })
+            .finally(function () {
+            // always executed
+        });
+    }
+
+    componentDidMount(){
+        this.getPortfolioItems();
+    }
+
     render() {
         return (
             <div className='portfolio-manager-wrapper'>
@@ -9,7 +40,7 @@ export default class PortfolioManager extends Component {
                     <h1>Portfolio Manager...</h1>
                 </div>
                 <div className='rightside'>
-                <PortfolioContainer />
+                <PortfolioSidebarList data={this.state.portfolioItems}/>
                 </div>
             </div>  
         );
