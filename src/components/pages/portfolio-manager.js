@@ -15,11 +15,11 @@ export default class PortfolioManager extends Component {
         this.handleSubmissionError = this.handleSubmissionError.bind(this);
     }
 
-    handleSuccesfulFormSubmission() {
-        //TODO
-        //update state
-        //render nes item list
-    }
+    handleSuccessfulFormSubmission(portfolioItem) {
+        this.setState({
+          portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
+        });
+      }
 
     handleSubmissionError(error) {
         console.log('handleSubmissionError', error);
