@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { DropzoneComponent } from 'react-dropzone-component';
+
+import "../../../node_modules/react-dropzone-component/styles/filepicker.css";
+import "../../../node_modules/dropzone/dist/min/dropzone.min.css";
+
 
 export default class PortfolioForm extends Component {
     constructor(props) {
@@ -18,8 +23,25 @@ export default class PortfolioForm extends Component {
 
         this.handlerChange = this.handlerChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.componentConfig =this.componentConfig.bind(this);
+        this.djsConfig = this.djsConfig.bind(this);
     }
 
+    componentConfig() {
+        return {
+          iconFiletypes: [".jpg", ".png"],
+          showFiletypeIcon: true,
+          postUrl: "https://httpbin.org/post"
+        }
+    }
+
+    djsConfig() {
+        return {
+            addRemoveLinks: true,
+            maxFiles: 1
+        }
+    }
+    
     handlerChange(event) {
         this.setState({
             [event.target.name]: event.target.value
@@ -99,28 +121,13 @@ export default class PortfolioForm extends Component {
                         onChange={this.handlerChange}
                         />
                     </div>
-                    <div>
-                        <input
-                        type="text"
-                        name="thumb_image"
-                        placeholder="Image Url"
-                        value={this.state.thumb_image}
-                        onChange={this.handlerChange}
-                        />
-                        <input
-                        type="text"
-                        name="banner_image"
-                        placeholder="Banner"
-                        value={this.state.banner_image}
-                        onChange={this.handlerChange}
-                        />
-                        <input
-                        type="text"
-                        name="logo"
-                        placeholder="Logo"
-                        value={this.state.logo}
-                        onChange={this.handlerChange}
-                        />
+                    <div className="image-ploader">
+                        <DropzoneComponent
+                        config={this.componentConfig()}
+                        djsConfig={this.djsConfig()}
+                        >
+                            
+                        </DropzoneComponent>
                     </div>
                     <div>
                         <button type='submit'>Save</button>
