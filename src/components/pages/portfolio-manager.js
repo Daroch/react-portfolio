@@ -52,7 +52,7 @@ export default class PortfolioManager extends Component {
             <div className='portfolio-manager-wrapper'>
                 <div className='leftside'>
                     <h1><PortfolioForm 
-                    handleSuccesfulFormSubmission={this.handleSuccessfulFormSubmission}
+                    handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
                     handleSubmissionError={this.handleSubmissionError}
                     /></h1>
                 </div>
