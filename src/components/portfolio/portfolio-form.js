@@ -126,8 +126,7 @@ export default class PortfolioForm extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className='portfolio-form-wrapper'>
                     <div>
                         <input
                         type="text"
@@ -145,6 +144,13 @@ export default class PortfolioForm extends Component {
                         />
                     </div>
                     <div>
+                        <input
+                        type="text"
+                        name="position"
+                        placeholder="Position"
+                        value={this.state.position}
+                        onChange={this.handlerChange}
+                        />
                         <select
                         name="category"
                         value={this.state.category}
@@ -154,13 +160,6 @@ export default class PortfolioForm extends Component {
                             <option value="Scheduling">Scheduling</option>
                             <option value="Enterprise">Enterprise</option>
                         </select>
-                        <input
-                        type="text"
-                        name="position"
-                        placeholder="Position"
-                        value={this.state.position}
-                        onChange={this.handlerChange}
-                        />
                     </div>
                     <div>
                     <textarea
@@ -197,7 +196,6 @@ export default class PortfolioForm extends Component {
                         <button type='submit'>Save</button>
                     </div>
                 </form>
-            </div>
         );
     }
 }
