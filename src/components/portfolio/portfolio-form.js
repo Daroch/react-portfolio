@@ -28,6 +28,11 @@ export default class PortfolioForm extends Component {
         this.handleThumbDrop = this.handleThumbDrop.bind(this);
         this.handleBannerDrop = this.handleBannerDrop.bind(this);
         this.handleLogoDrop = this.handleLogoDrop.bind(this);
+
+        this.thumbRef = React.createRef();
+        this.bannerRef = React.createRef();
+        this.logoRef = React.createRef();
+
     }
 
     componentConfig() {
@@ -44,7 +49,7 @@ export default class PortfolioForm extends Component {
             maxFiles: 1
         };
     }
-    
+
     handleThumbDrop(){
         return {
             addedfile: file => this.setState({thumb_image: file})
@@ -60,7 +65,7 @@ export default class PortfolioForm extends Component {
             addedfile: file => this.setState({logo: file})
         };
     }
-    
+
     handlerChange(event) {
         this.setState({
             [event.target.name]: event.target.value
@@ -75,7 +80,23 @@ export default class PortfolioForm extends Component {
         )
         .then(response => {
             this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
-            console.log("Form submitted", response);
+            //console.log("Form submitted", response);
+            [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
+                ref.current.dropzone.removeAllFiles();
+
+            });
+
+
+            this.setState({
+                name: "",
+                description: "",
+                url: "",
+                category: "eCommerce",
+                position: "",
+                thumb_image: "",
+                banner_image: "",
+                logo: ""
+            });
         })
         .catch(error => {
             console.log("error on Portfolio Submit Form", error);
@@ -85,7 +106,7 @@ export default class PortfolioForm extends Component {
 
     buildForm() {
         let formData = new FormData();
-      
+
         formData.append("portfolio_item[name]", this.state.name);
         formData.append("portfolio_item[description]", this.state.description);
         formData.append("portfolio_item[url]", this.state.url);
@@ -152,18 +173,21 @@ export default class PortfolioForm extends Component {
                     </div>
                     <div className="image-uploaders">
                         <DropzoneComponent
+                        ref={this.thumbRef}
                         config={this.componentConfig()}
                         djsConfig={this.djsConfig()}
                         eventHandlers={this.handleThumbDrop()}
                         />
 
                         <DropzoneComponent
+                        ref={this.bannerRef}
                         config={this.componentConfig()}
                         djsConfig={this.djsConfig()}
                         eventHandlers={this.handleBannerDrop()}
                         />
 
                         <DropzoneComponent
+                        ref={this.logoRef}
                         config={this.componentConfig()}
                         djsConfig={this.djsConfig()}
                         eventHandlers={this.handleLogoDrop()}
