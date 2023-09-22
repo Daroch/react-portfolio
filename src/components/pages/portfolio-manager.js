@@ -13,6 +13,7 @@ export default class PortfolioManager extends Component {
 
         this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
         this.handleSubmissionError = this.handleSubmissionError.bind(this);
+        this.handleDeleteClick = this.handleDeleteClick.bind(this);
     }
 
     handleSuccessfulFormSubmission(portfolioItem) {
@@ -23,6 +24,21 @@ export default class PortfolioManager extends Component {
 
     handleSubmissionError(error) {
         console.log('handleSubmissionError', error);
+    }
+
+    handleDeleteClick(portfolioItem) {
+        console.log('handleDeleteClick',portfolioItem);
+        axios.delete(`https://api.devcamp.space/portfolio/portfolio_items/${portfolioItem.id}`,
+        { withCredentials: true }
+        )
+        .then(response => {
+            // handle success
+            console.log(response);
+        })
+        .catch(error => {
+            // handle error
+            console.log("Error deleting item", error);
+        });
     }
 
     getPortfolioItems(){
@@ -40,7 +56,7 @@ export default class PortfolioManager extends Component {
             })
             .finally(function () {
             // always executed
-        });
+            });
     }
 
     componentDidMount(){
@@ -57,7 +73,9 @@ export default class PortfolioManager extends Component {
                     /></h1>
                 </div>
                 <div className='rightside'>
-                <PortfolioSidebarList data={this.state.portfolioItems}/>
+                <PortfolioSidebarList 
+                data={this.state.portfolioItems}
+                handleDeleteClick={this.handleDeleteClick}/>
                 </div>
             </div>  
         );
