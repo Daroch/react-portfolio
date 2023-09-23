@@ -34,4 +34,20 @@
             color: black;
         }
     }
+
+    .right-side {
+        display: flex;
+
+        a {
+            cursor: pointer;
+            font-size: 1.3em;
+            transition: 0.5s ease-in-out;
+            margin-left: 20px;
+            color: $teal;
+
+            &:hover {
+                color: $dark-teal;
+            }
+        }
+    }
 }
