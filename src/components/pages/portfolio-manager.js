@@ -33,13 +33,23 @@ export default class PortfolioManager extends Component {
         )
         .then(response => {
             // handle success
-            console.log(response);
+            this.setState({
+                portfolioItems: this.state.portfolioItems.filter(item => {
+                    return item.id !== portfolioItem.id;
+                })
+            })
         })
         .catch(error => {
             // handle error
             console.log("Error deleting item", error);
         });
     }
+
+    handleSuccessfulDelete(portfolioItem) {
+        this.setState({
+          portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
+        });
+      }
 
     getPortfolioItems(){
         axios.get('https://daroch314.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc')
