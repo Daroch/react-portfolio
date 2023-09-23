@@ -5,6 +5,9 @@ import {
   Route
 } from 'react-router-dom';
 import axios from 'axios';
+import { Library, library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 import NavigationContainer from './navigation/navigation-container';
 import PortfolioManager from './pages/portfolio-manager';
@@ -17,6 +20,8 @@ import Blog from './pages/blog';
 import Contact from './pages/contact';
 import About from './pages/about';
 import NoMatch from './pages/no-match';
+
+library.add(faTrash, faSignOutAlt);
 
 export default class App extends Component {
   constructor(props) {
