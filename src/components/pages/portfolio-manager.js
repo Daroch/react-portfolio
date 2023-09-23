@@ -8,12 +8,21 @@ export default class PortfolioManager extends Component {
     constructor() {
         super();
         this.state = {
-            portfolioItems: []
+            portfolioItems: [],
+            portfolioToEdit: {}
         };
 
         this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
         this.handleSubmissionError = this.handleSubmissionError.bind(this);
         this.handleDeleteClick = this.handleDeleteClick.bind(this);
+        this.handleEditClick = this.handleEditClick.bind(this);
+        this.clearPortfolioToEdit = this.clearPortfolioToEdit.bind(this)
+;    }
+
+    clearPortfolioToEdit() {
+        this.setState({
+            portfolioToEdit: {}
+        });
     }
 
     handleSuccessfulFormSubmission(portfolioItem) {
@@ -42,6 +51,14 @@ export default class PortfolioManager extends Component {
         .catch(error => {
             // handle error
             console.log("Error deleting item", error);
+        });
+    }
+
+    handleEditClick(portfolioItem) {
+        console.log('handleUpdatelick',portfolioItem);
+        //populate the form
+        this.setState({
+            portfolioToEdit: portfolioItem
         });
     }
 
@@ -80,12 +97,15 @@ export default class PortfolioManager extends Component {
                     <h1><PortfolioForm 
                     handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
                     handleSubmissionError={this.handleSubmissionError}
+                    clearPortfolioToEdit={this.clearPortfolioToEdit}
+                    portfolioToEdit={this.state.portfolioToEdit}
                     /></h1>
                 </div>
                 <div className='rightside'>
                 <PortfolioSidebarList 
                 data={this.state.portfolioItems}
-                handleDeleteClick={this.handleDeleteClick}/>
+                handleDeleteClick={this.handleDeleteClick}
+                handleEditClick={this.handleEditClick}/>
                 </div>
             </div>  
         );

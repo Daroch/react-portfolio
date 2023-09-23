@@ -27,7 +27,7 @@
                         font-size: 1.5em;
                     }
 
-                    .delete-icon {
+                    .delete-icon, .update-icon {
                         cursor: pointer;
                         color: $offwhite;
                         font-size: 1.3em;
@@ -35,6 +35,12 @@
 
                         &:hover {
                             color: $warning;
+                        }
+                    }
+
+                    .update-icon {
+                        &:hover {
+                            color: $blue;
                         }
                     }
             }
