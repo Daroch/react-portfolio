@@ -64,7 +64,7 @@ export default class PortfolioForm extends Component {
             url,
             thumb_image_url,
             banner_image_url,
-            logo_url
+            logo
           } = this.props.portfolioToEdit;
     
           this.props.clearPortfolioToEdit();
@@ -76,6 +76,9 @@ export default class PortfolioForm extends Component {
             category: category || "eCommerce",
             position: position || "",
             url: url || "",
+            thumb_image_url: thumb_image_url || "",
+            banner_image_url: banner_image_url || "",
+            logo: logo || "",
             editMode: true,
             apiUrl: `https://daroch314.devcamp.space/portfolio/portfolio_items/${id}`,
             apiAction: "patch"
@@ -212,6 +215,7 @@ export default class PortfolioForm extends Component {
                         />
                     </div>
                     <div className="image-uploaders three-column">
+                        {(this.state.editMode && this.state.thumb_image_url) ? 'hola' : 'adios'}
                         <DropzoneComponent
                         ref={this.thumbRef}
                         config={this.componentConfig()}
