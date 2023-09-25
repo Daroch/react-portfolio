@@ -115,7 +115,11 @@ export default class PortfolioForm extends Component {
             withCredentials: true
         })
         .then(response => {
-            this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
+            if(this.state.editMode){
+                this.props.handleEditFormSubmission();
+            }else{
+                this.props.handleNewFormSubmission(response.data.portfolio_item);
+            }
             //console.log("Form submitted", response);
             [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
                 ref.current.dropzone.removeAllFiles();
