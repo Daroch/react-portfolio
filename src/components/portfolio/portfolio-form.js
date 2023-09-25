@@ -18,7 +18,10 @@ export default class PortfolioForm extends Component {
             position: "",
             thumb_image: "",
             banner_image: "",
-            logo: ""
+            logo: "",
+            editMode: false,
+            apiUrl: "https://daroch314.devcamp.space/portfolio/portfolio_items",
+            apiAction: "post"
         }
 
         this.handlerChange = this.handlerChange.bind(this);
@@ -72,7 +75,10 @@ export default class PortfolioForm extends Component {
             description: description || "",
             category: category || "eCommerce",
             position: position || "",
-            url: url || ""
+            url: url || "",
+            editMode: true,
+            apiUrl: `https://daroch314.devcamp.space/portfolio/portfolio_items/${id}`,
+            apiAction: "patch"
           });
         }
       }
@@ -101,10 +107,13 @@ export default class PortfolioForm extends Component {
 
     handleSubmit(event) {
         //console.log("Submit event", event);
-        axios.post("https://daroch314.devcamp.space/portfolio/portfolio_items",
-        this.buildForm(),
-        {withCredentials: true}
-        )
+        //axios.post("https://daroch314.devcamp.space/portfolio/portfolio_items",
+        axios({
+            method: this.state.apiAction,
+            url: this.state.apiUrl,
+            data: this.buildForm(),
+            withCredentials: true
+        })
         .then(response => {
             this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
             //console.log("Form submitted", response);
