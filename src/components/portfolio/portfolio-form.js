@@ -31,11 +31,16 @@ export default class PortfolioForm extends Component {
         this.handleThumbDrop = this.handleThumbDrop.bind(this);
         this.handleBannerDrop = this.handleBannerDrop.bind(this);
         this.handleLogoDrop = this.handleLogoDrop.bind(this);
+        this.handleDeleteImage = this.handleDeleteImage.bind(this);
 
         this.thumbRef = React.createRef();
         this.bannerRef = React.createRef();
         this.logoRef = React.createRef();
 
+    }
+
+    handleDeleteImage(Imagetype) {
+        console.log("Handle delete image", Imagetype);
     }
 
     componentConfig() {
@@ -219,6 +224,11 @@ export default class PortfolioForm extends Component {
                         ? (
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.thumb_image} />
+                            <div className="image-removal-link">
+                                <a onClick={() => this.handleDeleteImage(this.state.thumb_image)}>
+                                Remove image
+                                </a>
+                            </div>
                         </div>) 
                         : ( 
                         <DropzoneComponent
@@ -235,6 +245,11 @@ export default class PortfolioForm extends Component {
                         ? (
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.banner_image} />
+                            <div className="image-removal-link">
+                                <a onClick={() => this.handleDeleteImage(this.state.banner_image)}>
+                                Remove image
+                                </a>
+                            </div>
                         </div>) 
                         : ( <DropzoneComponent
                         ref={this.bannerRef}
@@ -250,6 +265,11 @@ export default class PortfolioForm extends Component {
                         ? (
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.logo} />
+                            <div className="image-removal-link">
+                                <a onClick={() => this.handleDeleteImage(this.state.logo)}>
+                                Remove image
+                                </a>
+                            </div>
                         </div>) 
                         : ( 
                         <DropzoneComponent
