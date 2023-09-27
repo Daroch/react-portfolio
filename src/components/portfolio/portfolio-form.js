@@ -39,8 +39,18 @@ export default class PortfolioForm extends Component {
 
     }
 
-    handleDeleteImage(Imagetype) {
-        console.log("Handle delete image", Imagetype);
+    handleDeleteImage(imageType) {
+        //console.log("Handle delete image", Imagetype);
+        axios.delete(`https://api.devcamp.space/portfolio/delete-portfolio-image/${this.state.id}?image_type=${imageType}`,
+            { withCredentials: true }
+        ).then(response => {
+            //console.log('deleteImage', response);
+            this.setState({
+                [`${imageType}_url`]: ""
+            });
+        }).catch(error => {
+            console.log('deleteImage error', error);
+        });
     }
 
     componentConfig() {
@@ -143,7 +153,10 @@ export default class PortfolioForm extends Component {
                 position: "",
                 thumb_image: "",
                 banner_image: "",
-                logo: ""
+                logo: "",
+                editMode: false,
+                apiUrl: "https://daroch314.devcamp.space/portfolio/portfolio_items",
+                apiAction: "post"
             });
         })
         .catch(error => {
@@ -225,7 +238,7 @@ export default class PortfolioForm extends Component {
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.thumb_image_url} />
                             <div className="image-removal-link">
-                                <a onClick={() => this.handleDeleteImage(this.state.thumb_image)}>
+                                <a onClick={() => this.handleDeleteImage("thumb_image")}>
                                 Remove image
                                 </a>
                             </div>
@@ -246,7 +259,7 @@ export default class PortfolioForm extends Component {
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.banner_image_url} />
                             <div className="image-removal-link">
-                                <a onClick={() => this.handleDeleteImage(this.state.banner_image)}>
+                                <a onClick={() => this.handleDeleteImage("banner_image")}>
                                 Remove image
                                 </a>
                             </div>
@@ -266,7 +279,7 @@ export default class PortfolioForm extends Component {
                         <div className="portfolio-manager-image-wrapper">
                             <img src={this.state.logo_url} />
                             <div className="image-removal-link">
-                                <a onClick={() => this.handleDeleteImage(this.state.logo)}>
+                                <a onClick={() => this.handleDeleteImage("logo")}>
                                 Remove image
                                 </a>
                             </div>
