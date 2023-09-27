@@ -30,14 +30,15 @@ class Blog extends Component {
     this.getBlogItems();
   }
   render() {
+
+    const blogRecords = this.state.blogItems.map(blogItem => {
+        return <h2>{blogItem.title}</h2>;
+    });
+
     return (
       <div>
-        <div>
-            <h2>List of post</h2>
-        </div>
-        <div>
-          <Link to="/about">Read more about myself</Link>
-        </div>
+        {blogRecords}
+
       </div>
     );
   }
