@@ -39,9 +39,10 @@ class Blog extends Component {
     });
 
     return (
-      <div>
-        {blogRecords}
-
+      <div className='blog-container-wrapper'>
+        <div className='blog-content-wrapper'>
+          {blogRecords}
+        </div>
       </div>
     );
   }

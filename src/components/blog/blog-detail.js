@@ -30,11 +30,15 @@ export default class BlogDetail extends Component {
     render() {
         const {id, title, content, featured_image_url, blog_status} = this.state.blogItem;
         return (
-            <div>
-                <h1>{title}</h1>
-                <img src={featured_image_url} />
-                <div>
-                    {content}
+            <div className='blog-container-wrapper'>
+                <div className='blog-content-wrapper'>
+                    <h1>{title}</h1>
+                    <div className='featured-image'>
+                        <img src={featured_image_url} />
+                    </div>
+                    <div className='content'>
+                        {content}
+                    </div>
                 </div>
             </div>
         );
