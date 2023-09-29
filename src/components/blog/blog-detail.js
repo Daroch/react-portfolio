@@ -9,8 +9,16 @@ export default class BlogDetail extends Component {
             currentId: this.props.match.params.slug,
             blogItem: {}
         }
+
+        this.getBlogItem = this.getBlogItem.bind(this);
+        this.activateInfinityScroll();
     }
 
+    activateInfinityScroll() {
+        window.onscroll = () => {
+            console.log('onScroll');
+        }
+    }
     getBlogItem() {
         axios.get(`https://daroch314.devcamp.space/portfolio/portfolio_blogs/${this.state.currentId}`
         ).then(response => {
