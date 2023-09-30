@@ -9,7 +9,9 @@ class Blog extends Component {
     super();
 
     this.state = {
-        blogItems: []
+        blogItems: [],
+        currentPage: 0,
+        totalRecords: 0
     }
 
     this.getBlogItems = this.getBlogItems.bind(this);
@@ -24,7 +26,7 @@ class Blog extends Component {
       //console.log("document.documentElement.offsetHeight", document.documentElement.offsetHeight);
       if (
         window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight-5
+        document.documentElement.offsetHeight-1
       ) {
         console.log("get more posts");
       }
@@ -33,10 +35,16 @@ class Blog extends Component {
   }
 
   getBlogItems() {
+    this.setState({
+      currentPage: this.state.currentPage + 1
+    })
     axios.get('https://daroch314.devcamp.space/portfolio/portfolio_blogs',
     {withCredentials: true}
     ).then(response => {
-        //console.log('GetBlogItems', response);
+      this.setState({
+        totalRecords: response.data.meta.total_records
+      })
+        console.log('GetBlogItems', response);
         this.setState({
             blogItems: response.data.portfolio_blogs
         })
