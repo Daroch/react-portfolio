@@ -13,8 +13,24 @@ class Blog extends Component {
     }
 
     this.getBlogItems = this.getBlogItems.bind(this);
+    this.activateInfiniteScroll();
 
-;  }
+  }
+
+  activateInfiniteScroll() {
+    window.onscroll = () => {
+      //console.log("window.innerHeight", window.innerHeight);
+      //console.log("document.documentElement.scrollTop", document.documentElement.scrollTop);
+      //console.log("document.documentElement.offsetHeight", document.documentElement.offsetHeight);
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight-5
+      ) {
+        console.log("get more posts");
+      }
+    };
+  
+  }
 
   getBlogItems() {
     axios.get('https://daroch314.devcamp.space/portfolio/portfolio_blogs',
@@ -33,7 +49,7 @@ class Blog extends Component {
     this.getBlogItems();
   }
   render() {
-
+    
     const blogRecords = this.state.blogItems.map(item => {
         return <BlogItem key={item.id} item={item} />
     });
