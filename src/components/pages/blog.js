@@ -22,30 +22,36 @@ class Blog extends Component {
   }
 
   activateInfiniteScroll() {
-    window.onscroll = () => {
-      //console.log("window.innerHeight", window.innerHeight);
-      //console.log("document.documentElement.scrollTop", document.documentElement.scrollTop);
-      //console.log("document.documentElement.offsetHeight", document.documentElement.offsetHeight);
+    window.onscroll = c() => {
+      console.log("window.innerHeight", window.innerHeight);
+      console.log("document.doumentElement.scrollTop", document.documentElement.scrollTop);
+      console.log("document.documentElement.offsetHeight", document.documentElement.offsetHeight);
+      if(this.state.isLoading || this.state.blogItems.lenght === this.state.totalCount){
+        return;
+      }
       if (
-        window.innerHeight + document.documentElement.scrollTop >=
+        window.innerHeight + document.documentElement.scrollTop ===
         document.documentElement.offsetHeight-1
       ) {
         console.log("get more posts");
+        this.getBlogItems();
       }
     };
   
   }
 
   getBlogItems() {
+    //debugger;
     this.setState({
       currentPage: this.state.currentPage + 1
     })
-    axios.get('https://daroch314.devcamp.space/portfolio/portfolio_blogs',
+    
+    axios.get(`https://daroch314.devcamp.space/portfolio/portfolio_blogs?page=${this.state.currentPage}`,
     {withCredentials: true}
     ).then(response => {
         console.log('GetBlogItems', response);
         this.setState({
-            blogItems: response.data.portfolio_blogs,
+            blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
             totalCount: response.data.meta.total_records,
             isLoading: false
         })
@@ -57,6 +63,7 @@ class Blog extends Component {
   componentWillMount() {
     this.getBlogItems();
   }
+
   render() {
     
     const blogRecords = this.state.blogItems.map(item => {
