@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import BlogItem from "../blog/blog-item";
 
@@ -11,7 +12,8 @@ class Blog extends Component {
     this.state = {
         blogItems: [],
         currentPage: 0,
-        totalRecords: 0
+        totalCount: 0,
+        isLoading: true
     }
 
     this.getBlogItems = this.getBlogItems.bind(this);
@@ -41,12 +43,11 @@ class Blog extends Component {
     axios.get('https://daroch314.devcamp.space/portfolio/portfolio_blogs',
     {withCredentials: true}
     ).then(response => {
-      this.setState({
-        totalRecords: response.data.meta.total_records
-      })
         console.log('GetBlogItems', response);
         this.setState({
-            blogItems: response.data.portfolio_blogs
+            blogItems: response.data.portfolio_blogs,
+            totalCount: response.data.meta.total_records,
+            isLoading: false
         })
     }).catch(error => {
         console.log('Error getBlogItems', error);
@@ -64,9 +65,15 @@ class Blog extends Component {
 
     return (
       <div className='blog-container-wrapper'>
+        
         <div className='blog-content-wrapper'>
           {blogRecords}
         </div>
+        {this.state.isLoading ? 
+        (<div className="content-loader">
+          <FontAwesomeIcon icon="spinner" spin />
+        </div>)
+        : null}
       </div>
     );
   }
