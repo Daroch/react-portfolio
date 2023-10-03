@@ -62,6 +62,10 @@ class Blog extends Component {
     this.getBlogItems();
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
+  }
+
   render() {
     
     const blogRecords = this.state.blogItems.map(item => {
