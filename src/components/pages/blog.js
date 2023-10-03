@@ -22,16 +22,16 @@ class Blog extends Component {
   }
 
   activateInfiniteScroll() {
-    window.onscroll = c() => {
-      console.log("window.innerHeight", window.innerHeight);
-      console.log("document.doumentElement.scrollTop", document.documentElement.scrollTop);
-      console.log("document.documentElement.offsetHeight", document.documentElement.offsetHeight);
-      if(this.state.isLoading || this.state.blogItems.lenght === this.state.totalCount){
+    window.onscroll = () => {
+      //console.log("window.innerHeight", window.innerHeight);
+      //console.log("document.doumentElement.scrollTop", document.documentElement.scrollTop);
+      //console.log("document.documentElement.offsetHeight", document.documentElement.offsetHeight);
+      if(this.state.isLoading || this.state.blogItems.length === this.state.totalCount){
         return;
       }
       if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight-1
+        Math.ceil(window.innerHeight + document.documentElement.scrollTop) ===
+        document.documentElement.offsetHeight
       ) {
         console.log("get more posts");
         this.getBlogItems();
