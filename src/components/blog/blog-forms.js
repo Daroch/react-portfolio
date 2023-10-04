@@ -12,6 +12,7 @@ export default class BlogForm extends Component {
         }
 
         this.handleChangeBlogForm = this.handleChangeBlogForm.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
     handleChangeBlogForm(event) {
@@ -20,9 +21,16 @@ export default class BlogForm extends Component {
         })
         console.log("handleChangeBlogForm", event);
     }
+
+    handleFormSubmit(event) {
+        console.log("SubmitForm", blog);
+        this.props.handleSuccesfulFormSubmission(this.state);
+        event.preventDefault();
+    }
+    
     render() {
         return (
-            <form>
+            <form onSubmit={this.handleFormSubmit}>
                 <input 
                 name="title"
                 type="text"
