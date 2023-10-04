@@ -40,7 +40,7 @@ class Blog extends Component {
 
  onScroll() {
     //console.log("window.innerHeight", window.innerHeight);
-    //console.log("document.doumentElement.scrollTop", document.documentElement.scrollTop);
+    //console.log("document.documentElement.scrollTop", document.documentElement.scrollTop);
     //console.log("document.documentElement.offsetHeight", document.documentElement.offsetHeight);
     if(this.state.isLoading || this.state.blogItems.length === this.state.totalCount){
       return;

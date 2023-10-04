@@ -19,18 +19,18 @@ export default class BlogForm extends Component {
         this.setState({
             [event.target.name]: event.target.value
         })
-        console.log("handleChangeBlogForm", event);
+        //console.log("handleChangeBlogForm", event);
     }
 
     handleFormSubmit(event) {
-        console.log("SubmitForm", blog);
-        this.props.handleSuccesfulFormSubmission(this.state);
+        console.log("SubmitForm", event);
+        this.props.handleSuccessfulFormSubmission(this.state);
         event.preventDefault();
     }
     
     render() {
         return (
-            <form onSubmit={this.handleFormSubmit}>
+            <form className="form-wrapper" onSubmit={this.handleFormSubmit}>
                 <input 
                 name="title"
                 type="text"
@@ -44,7 +44,7 @@ export default class BlogForm extends Component {
                 value={this.state.content}
                 onChange={this.handleChangeBlogForm} />
 
-                <button>Save</button>
+                <button type='submit'>Save</button>
             </form>
         );
     }
