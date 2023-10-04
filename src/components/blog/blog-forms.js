@@ -15,6 +15,9 @@ export default class BlogForm extends Component {
     }
 
     handleChangeBlogForm(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
         console.log("handleChangeBlogForm", event);
     }
     render() {
