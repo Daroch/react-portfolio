@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 
 ReactModal.setAppElement(".app-wrapper");
+import BlogForm from '../blog/blog-forms';
 
 export default class BlogModal extends Component {
     constructor(props){
@@ -28,7 +29,7 @@ export default class BlogModal extends Component {
                 onRequestClose={() => {
                     this.props.handleModalClose()
                     }}>
-                    <h1>I'm a Modal</h1>
+                    <BlogForm />
                 </ReactModal>
             </div>
         );
