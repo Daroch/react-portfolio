@@ -29,12 +29,16 @@ export default class BlogForm extends Component {
         this.buildForm(),
         {withCredentials: true}
         ).then(response => {
-            this.props.handleSuccessfulFormSubmission(response.data);
-            console.log('Api response submit', response);
+            this.props.handleSuccessfulFormSubmission(response.data.portfolio_blog);
+            this.setState({
+                title: "",
+                content: "",
+                blog_status: "draft",
+                featured_image: ""
+            });
         }).catch(error => {
             console.log("HnadleFormSubmit Error", error)
         });
-        this.props.handleSuccessfulFormSubmission(this.state);
         event.preventDefault();
     }
     
