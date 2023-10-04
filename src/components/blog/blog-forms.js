@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class BlogForm extends Component {
     constructor(props) {
@@ -23,11 +24,30 @@ export default class BlogForm extends Component {
     }
 
     handleFormSubmit(event) {
-        console.log("SubmitForm", event);
+        //console.log("SubmitForm", event);
+        axios.post("https://daroch314.devcamp.space/portfolio/portfolio_blogs",
+        this.buildForm(),
+        {withCredentials: true}
+        ).then(response => {
+            this.props.handleSuccessfulFormSubmission(response.data);
+            console.log('Api response submit', response);
+        }).catch(error => {
+            console.log("HnadleFormSubmit Error", error)
+        });
         this.props.handleSuccessfulFormSubmission(this.state);
         event.preventDefault();
     }
     
+    buildForm() {
+        let formData = new FormData();
+      
+        formData.append("portfolio_blog[title]", this.state.title);
+        formData.append("portfolio_blog[blog_status]", this.state.blog_status);
+        formData.append("portfolio_blog[content]", this.state.content);
+      
+        return formData;
+    }
+
     render() {
         return (
             <form className="form-wrapper" onSubmit={this.handleFormSubmit}>
@@ -36,6 +56,11 @@ export default class BlogForm extends Component {
                 type="text"
                 placeholder="Title of your post"
                 value={this.state.title}
+                onChange={this.handleChangeBlogForm} />
+                <input 
+                name="blog_status"
+                type="text"
+                value={this.state.blog_status}
                 onChange={this.handleChangeBlogForm} />
                 <input 
                 name="content"
