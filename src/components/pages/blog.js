@@ -14,13 +14,21 @@ class Blog extends Component {
         blogItems: [],
         currentPage: 0,
         totalCount: 0,
-        isLoading: true
+        isLoading: true,
+        blogModalIsOpen: false
     }
 
     this.getBlogItems = this.getBlogItems.bind(this);
     this.onScroll = this.onScroll.bind(this);
     window.addEventListener('scroll',this.onScroll,false);
+    this.handleNewBlogClick = this.handleNewBlogClick.bind(this);
 
+  }
+
+  handleNewBlogClick() {
+    this.setState({
+      blogModalIsOpen: true
+    });
   }
 
  onScroll() {
@@ -75,7 +83,10 @@ class Blog extends Component {
 
     return (
       <div className='blog-container-wrapper'>
-        <BlogModal/>
+        <div className="new-blog-link">
+          <a onClick={this.handleNewBlogClick}>New Blog</a>
+        </div>
+        <BlogModal modalIsOpen={this.state.blogModalIsOpen}/>
         <div className='blog-content-wrapper'>
           {blogRecords}
         </div>
