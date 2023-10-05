@@ -40,6 +40,7 @@ class Blog extends Component {
   }
 
   handleModalClose() {
+    //console.log("handlemodalclose");
     this.setState({
       blogModalIsOpen: false
     })
@@ -103,6 +104,7 @@ class Blog extends Component {
         <BlogModal modalIsOpen={this.state.blogModalIsOpen}
         handleSuccessfulNewBlogSubmission={this.handleSuccessfulNewBlogSubmission}
         getBlogItems={this.getBlogItems}
+        handleModalClose={this.handleModalClose}
         />
         <div className='blog-content-wrapper'>
           {blogRecords}
