@@ -10,9 +10,9 @@ export default class BlogModal extends Component {
 
         this.customStyles = {
             content: {
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)"
+              top: "25%",
+              left: "25%",
+              transform: "translate(-25%, -25%)"
             },
             overlay: {
                 backgroundColor: "rgba(1, 1, 1, 0.60)"

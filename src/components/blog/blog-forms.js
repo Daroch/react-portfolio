@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
 import axios from 'axios';
+import BlogEditor from './blog_editor';
 
 export default class BlogForm extends Component {
+    
     constructor(props) {
         super(props);
 
@@ -15,6 +17,7 @@ export default class BlogForm extends Component {
         this.handleChangeBlogForm = this.handleChangeBlogForm.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
+
 
     handleChangeBlogForm(event) {
         this.setState({
@@ -78,6 +81,7 @@ export default class BlogForm extends Component {
                 value={this.state.content}
                 onChange={this.handleChangeBlogForm} />
                 </div>
+                <BlogEditor content={this.state.content}/>
                 <button className='btn' type='submit'>Save</button>
 
             </form>
