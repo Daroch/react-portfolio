@@ -62,11 +62,14 @@ export default class BlogForm extends Component {
                 placeholder="Blog title"
                 value={this.state.title}
                 onChange={this.handleChangeBlogForm} />
-                <input 
+                <select 
+                className='select-element'
                 name="blog_status"
-                type="text"
                 value={this.state.blog_status}
-                onChange={this.handleChangeBlogForm} />
+                onChange={this.handleChangeBlogForm}>
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                </select>
                 </div>
                 <div className='two-column'><input 
                 name="content"
