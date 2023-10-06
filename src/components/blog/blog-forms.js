@@ -9,7 +9,10 @@ export default class BlogForm extends Component {
             title: "",
             content: "",
             blog_status: "draft",
-            featured_image: ""
+            featured_image: "",
+            editMode: false,
+            apiUrl: "https://daroch314.devcamp.space/portfolio/portfolio_blogs",
+            apiAction: "post"
         }
 
         this.handleChangeBlogForm = this.handleChangeBlogForm.bind(this);
@@ -25,10 +28,12 @@ export default class BlogForm extends Component {
 
     handleFormSubmit(event) {
         //console.log("SubmitForm", event);
-        axios.post("https://daroch314.devcamp.space/portfolio/portfolio_blogs",
-        this.buildForm(),
-        {withCredentials: true}
-        ).then(response => {
+        axios({
+            method: this.state.apiAction,
+            url: this.state.apiUrl,
+            data: this.buildForm(),
+            withCredentials: true
+        }).then(response => {
             this.props.handleSuccessfulFormSubmission(response.data.portfolio_blog);
             this.setState({
                 title: "",

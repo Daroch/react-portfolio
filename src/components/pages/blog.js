@@ -24,6 +24,7 @@ class Blog extends Component {
     this.handleNewBlogClick = this.handleNewBlogClick.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
     this.handleSuccessfulNewBlogSubmission = this.handleSuccessfulNewBlogSubmission.bind(this);
+    this.handleEditBlogClick = this.handleEditBlogClick.bind(this);
   }
 
   handleSuccessfulNewBlogSubmission(blog) {
@@ -34,6 +35,12 @@ class Blog extends Component {
   }
   
   handleNewBlogClick() {
+    this.setState({
+      blogModalIsOpen: true
+    });
+  }
+
+  handleEditBlogClick(blog) {
     this.setState({
       blogModalIsOpen: true
     });
@@ -93,7 +100,8 @@ class Blog extends Component {
   render() {
     
     const blogRecords = this.state.blogItems.map(item => {
-        return <BlogItem key={item.id} item={item} />
+        return <BlogItem key={item.id} item={item}
+        handleEditBlogClick={this.handleEditBlogClick} />
     });
 
     return (
@@ -103,8 +111,8 @@ class Blog extends Component {
         </div>
         <BlogModal modalIsOpen={this.state.blogModalIsOpen}
         handleSuccessfulNewBlogSubmission={this.handleSuccessfulNewBlogSubmission}
-        getBlogItems={this.getBlogItems}
         handleModalClose={this.handleModalClose}
+        handleSuccessfulEditBlogSubmission={this.handleSuccessfulEditBlogSubmission}
         />
         <div className='blog-content-wrapper'>
           {blogRecords}

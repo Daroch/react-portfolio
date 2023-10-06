@@ -10,6 +10,9 @@ const BlogItem = props => {
                 <h1>{title}</h1>
             </Link>
             <div>{content}</div>
+            <div>
+                <a onClick={() => props.handleEditBlogClick(props.item)}>Editar</a>
+            </div>
             
         </div>
     );
